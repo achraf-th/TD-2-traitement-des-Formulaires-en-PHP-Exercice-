@@ -1,0 +1,565 @@
+
+
+Exercice 2  
+ 
+Écrire un formulaire qui demande le Nom et le Sexe de l'utilisateur (Mr ou Mme). Ce formulaire appelle une page qui affichera « Bonjour Mr ......... » ou « Bonjour Mme ......... » suivant le cas (avec le vrai nom de la personne)
+
+==================================================================================================================================================
+
+
+<form action="r.php" method="GET">
+ <p>Votre Nom : <input type="text" name="nom" /></p>
+ <select name="le_sexe" >
+    <option value="Mr">Mr</option>
+    <option value="Mme">Mme</option>
+ <p><input type="submit" value="OK" name="ok"></p>
+</form>
+
+
+
+
+<?php
+if(isset($_GET["le_sexe"]) && isset($_GET['nom']) && isset($_GET['ok'])){
+$le_sexe = $_GET["le_sexe"];
+$name = $_GET['nom'];
+
+if ($le_sexe == "Mr"){
+    echo " hello mr $name  ";
+
+}elseif ($le_sexe == "Mme"){
+    echo " hello mme $name  ";
+
+}
+}
+    ?>
+
+__________________________________________________________________________________________________________________
+
+Exercice 1  
+  
+Écrire un formulaire « Calculatrice » : 2 cases pour la saisie des opérandes, un groupe de 4 cases à cocher (ou une liste déroulante) pour le choix de l'opération, et affichage du résultat de l'opération
+
+
+===================================================================================================================
+
+
+<form action = "r.php" method = "GET" > 
+<input type = "text" name = "er">
+<input type = "text" name = "eme" >
+<select name="operation" >
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="/">/</option>
+    <option value="*">*</option>
+</select>
+<button type = "submit" name ="button" >click here </button>
+</form>
+
+
+
+
+
+<?php
+if (isset($_GET["er"]) && isset($_GET["eme"])  && isset($_GET["operation"]) && isset($_GET["button"])) 
+{
+    $operation = $_GET["operation"];
+    $rslt = 0;
+if ($operation == "+"){
+    $rslt = $_GET["er"] + $_GET["eme"];
+}elseif ($operation == "-"){
+    $rslt = $_GET["er"] - $_GET["eme"];
+}elseif ($operation == "*"){
+    $rslt = $_GET["er"] * $_GET["eme"];
+}elseif ($operation == "/"){
+    $rslt = $_GET["er"] / $_GET["eme"];
+}
+}
+echo $rslt;
+
+
+
+_________________________________________________________________________________________________________________________
+
+Exercice 3  
+ 
+Écrire un formulaire qui demande deux Variables a et b. Il affiche ensuite la table de multiplication par a sur b lignes. Le formulaire doit se souvenir des valeurs choisies. 
+
+=========================================================================================================================
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<form action="r.php" method="POST">
+<form>
+  <div class="form-group">
+    <label for="formGroupExampleInput">1er number</label>
+    <input type="text" class="form-control" name="a" placeholder="a">
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">2eme number</label>
+    <input type="text" class="form-control" name="b" placeholder="b">
+  </div>
+  <button type="submit" class="btn btn-primary ">Submit</button>
+</form>
+
+
+
+<?php
+if(isset($_POST)){
+    $a=$_POST["a"];
+    $b=$_POST["b"];
+    $resultat; 
+    for($i=0; $i<=$b;$i++)
+    {
+        $resultat=$a*$i ;
+        echo $a.'  *  '.$i.'  =  '. $resultat.'<br>' ; 
+    }
+}
+?>
+
+
+
+
+===================================================================================================================
+
+Exercice 4  
+ 
+1) Créer un formulaire comprenant un groupe de champs ayant pour titre "Adresse client". Le groupe doit permettre la saisie du nom, du prénom, de l’adresse, de la ville et du code postal. Les données sont ensuite traitées par un fichier PHP séparé récupérant les données et les affichant dans un tableau HTML.2) Améliorer le script précédent en vérifiant l’existence des données et en affichant une boîte d’alerte JavaScript si l’une des données est manquante. 
+
+=================================================================================================================================
+
+
+
+<!DOCTYPE html>
+ <html>
+    <head>
+        <title>Cours Complet Bootstrap 4</title>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     </head>
+     
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+     <body>
+  
+         <div class="container">
+             <h1>Adresse client</h1>
+             <form action="r.php" method="POST" class="needs-validation" novalidate>
+                 <div class="form-row">
+                     <div class="col-md-4 mb-3">
+                         <label for="prenom">Prénom</label>
+                         <input type="text" class="form-control" name="prenom" placeholder="Pierre" required>
+                         <div class="valid-feedback">Ok !</div>
+                         <div class="invalid-feedback">Valeur incorrecte</div>
+                     </div>
+                     <div class="col-md-4 mb-3">
+                         <label for="nom">Nom de famille</label>
+                         <input type="text" class="form-control" name="nom" placeholder="Giraud" required>
+                         <div class="valid-feedback">Ok !</div>
+                         <div class="invalid-feedback">Valeur incorrecte</div>
+                     </div>
+              
+                 </div>
+                 <div class="form-row">
+                     <div class="col-md-6 mb-3">
+                         <label for="ville">Ville</label>
+                         <input type="text" class="form-control" name="ville" placeholder="Ville" required>
+                         <div class="valid-feedback">Ok !</div>
+                         <div class="invalid-feedback">Valeur incorrecte</div>
+                     </div>
+                     <div class="col-md-3 mb-3">
+                         <label for="pays">Pays</label>
+                         <input type="text" class="form-control" name="pays" placeholder="Pays" required>
+                         <div class="valid-feedback">Ok !</div>
+                         <div class="invalid-feedback">Valeur incorrecte</div>
+                     </div>
+                     <div class="col-md-3 mb-3">
+                         <label for="cp">Code postal</label>
+                         <input type="number" class="form-control" name="cp" placeholder="Code postal" required>
+                         <div class="valid-feedback">Ok !</div>
+                         <div class="invalid-feedback">Valeur incorrecte</div>
+                     </div>
+                 </div>
+                 <button class="btn btn-primary"  type="submit">Envoyer</button>
+             </form>
+         </div>
+         <script>
+           /*La fonction principale de ce script est d'empêcher l'envoi du formulaire si un champ a été mal rempli
+            *et d'appliquer les styles de validation aux différents éléments de formulaire*/
+           (function() {
+             'use strict';
+             window.addEventListener('load', function() {
+               let forms = document.getElementsByClassName('needs-validation');
+               let validation = Array.prototype.filter.call(forms, function(form) {
+                 form.addEventListener('submit', function(event) {
+                   if (form.checkValidity() === false) {
+                     event.preventDefault();
+                     event.stopPropagation();
+                   }
+                   form.classList.add('was-validated');
+                 }, false);
+               });
+             }, false);
+           })();
+         </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+    <?php
+    if(isset($_POST)){
+        $prenom=$_POST['prenom'];
+        $nom=$_POST['nom'];
+        $ville=$_POST['ville'];
+        $pays=$_POST['pays'];
+        $cp=$_POST['cp'];
+    }
+    ?>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Prénom</th>
+      <th scope="col">Nom</th>
+      <th scope="col">ville</th>
+      <th scope="col">payes</th>
+      <th scope="col">code postale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><?php echo  $prenom ?></td>
+      <td> <?php echo  $nom ?></td>
+      <td> <?php echo  $ville ?></td>
+      <td> <?php echo  $pays ?></td>
+      <td> <?php echo  $cp ?></td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+========================================================================================================================
+
+Exercice 5  
+ 
+Créer un formulaire de saisie d’adresse e-mail contenant un champ caché destiné à récupérer le type du navigateur de l’utilisateur. Le code PHP affiche l’adresse mail et le nom du navigateur dans la même page après vérification de l’existence des données.  
+Indice : $_SERVER['HTTP_USER_AGENT'
+
+
+============================================================================================================================
+<!DOCTYPE html>
+ <html>
+    <head>
+        <title>Cours Complet Bootstrap 4</title>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     </head>
+     
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+     <body>
+             <form action="r.php" method="POST" >
+             <div class="input-group input-group-lg">
+  <div class="input-group-prepend  ">
+    <span class="input-group-text mb-5 ">E-mail</span>
+  </div>
+  <input type="text" class="form-control " name="email">
+</div>
+<button type="submit" class="btn btn-primary btn-lg btn-block w-50">Block level button</button>
+</form>
+              
+    </body>
+</html>
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+    <?php
+    if(isset($_POST)){
+        $email=$_POST['email'];
+        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE)
+   $nom = 'Internet explorer';
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== FALSE) //For Supporting IE 11
+    $nom = 'Internet explorer';
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE)
+   $nom = 'Mozilla Firefox';
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== FALSE)
+   $nom = 'Google Chrome';
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== FALSE)
+   $nom = "Opera Mini";
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== FALSE)
+   $nom = "Opera";
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== FALSE)
+   $nom = "Safari";
+ else
+   $nom = 'Something else';
+    }
+    ?>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">email</th>
+      <th scope="col">navigature</th>
+  
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><?php echo  $email ?></td>
+      <td> <?php echo  $nom ?></td>
+    
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+_____________________________________________________________________________________________________________________________________________
+
+
+Exercice 6  
+  Créer un formulaire demandant la saisie d’un prix HT et d’un taux de TVA. Le script affiche le montant de la TVA et le prix TTC dans deux zones de texte créées dynamiquement. Le formulaire maintient les données saisies.  
+
+
+
+====================================================================================================================================================
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Exercice 6</title>
+	<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+        <div class="container text-center">
+			<h2>Exercice 6</h2>
+			      <h2><a href="index.php">Get back to the main page</a></h2>
+            <div class="row">
+                <form action="" method="GET" >
+                	<div class="contenu">
+	                    <p>Prix HT  : <input id="input1" name="input1"></p>
+	                    <p>Taux TVA : <input id="input2" name="input2"></p>
+                	<button type="submit" name="cal">Affiche</button>
+                </form>
+ 
+            </div>
+ 
+            <div class="row">
+                <p class="resultat"></p>
+            </div>
+ 
+        </div>
+</body>
+</html>
+
+<?php 
+
+
+if (isset($_GET['input1']) && isset($_GET['input2']) && isset($_GET['cal'])) {
+	
+	$pttc = $_GET['input1'] * ( $_GET['input2'] / 100) + $_GET['input1'];
+	
+	echo "<p class='text-center'> <div> le prix hors taxe est ".$_GET['input1']." MAD</div><div> la TVA est ".$_GET['input2']." MAD</div><div> le prix de vemte est ".$pttc." MAD</div></p>";
+
+
+
+/*Le script affiche le
+montant de la TVA et le prix TTC dans deux zones de texte créées dynamiquement. Le formulaire
+maintient les données saisies. */
+
+
+	
+}
+ ?>
+
+
+
+_________________________________________________________________________________________________________________________
+
+Exercice 7  
+ 
+Créer un formulaire n’effectuant que le transfert de fichiers ZIP et d’une taille limitée à 1 Mo. Le script affiche le nom du fichier du poste client ainsi que la taille du fichier transféré et la confirmation de réception.  
+
+==================================================================================================================================
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Exercice 7</title>
+	<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+        <div class="container text-center">
+			<h2>Exercice 7</h2>
+			      <h2><a href="index.php">Get back to the main page</a></h2>
+            <div class="row">
+                <form action="" method="POST" enctype="multipart/form-data">
+                	<div class="contenu">
+	                    <p>Load the file : <input id="input1" type="file" name="input1" accept=".zip" size="1" max-file-size="1024" total-max-size="1024"></p>
+                	</div>
+            		<button type="submit">Send</button>
+                </form>
+ 
+            </div>
+ 
+        </div>
+</body>
+</html>
+
+<?php 
+
+
+if(isset($_POST)){
+        $file_plase = "input1/";
+        $rslt = "";
+        $my_file_type = $_FILES['input1']['type'];
+        if($my_file_type == "application/x-zip-compressed"){
+            if($_FILES['input1']['size'] > 1000000){
+                $rslt = "This file is so big <br>".
+                "max 1 M oct";
+
+
+            }else{
+                  $rslt = "the file name : ".$_FILES["input1"]["name"]."<br>".
+                    "the file size : ".$_FILES['input1']['size']."oct <br>";
+            }
+
+        }else{
+            $rslt = "the file is not zip <br> your file is :";
+        }
+
+
+    }
+    ?>
+    <p><?php if(isset($rslt)){echo $rslt;
+    
+    } ?></p>
+
+
+_______________________________________________________________________________________________________________________________________________
+
+
+Exercice 8  
+ 
+Dans la perspective de création d’un site d’agence immobilière, créer un formulaire comprenant trois boutons Submit nommés « Vendre », « Acheter » et « Louer». En fonction du choix effectué par le visiteur, le rediriger vers une page spécialisée dont le contenu réponde au critère choisi. 
+
+
+
+====================================================================================================================================================
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Exercice 8</title>
+	<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+        <div class="container text-center">
+			<h2>CALCULATRICE</h2>
+			      <h2><a href="index.php">Get back to the main page</a></h2>
+            <div class="row">
+                <form action="" method="GET" >
+                	<div class="contenu">
+	                    
+	                	<button type="submit" name="vendre">Vendre</button>
+	                	<button type="submit" name="acheter">Acheter</button>
+                		<button type="submit" name="louer">Louer</button>
+                	</div>
+                </form>
+ 
+            </div>
+ 
+            <div class="row">
+                <p class="resultat"></p>
+            </div>
+ 
+        </div>
+</body>
+</html>
+
+<?php 
+
+
+if (isset($_GET)) {
+	if (isset($_GET['vendre'])) {
+		header("location: vendre.php");
+	} else if(isset($_GET['acheter'])) {
+		echo "string";
+		header("location: achetre.php");
+	} else if(isset($_GET['louer'])) {
+		header("location: louer.php");
+	}
+	
+	
+}
+ ?>
+
+
